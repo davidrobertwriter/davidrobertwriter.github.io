@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Website Seized</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    /* Reset and basics */
+    html, body {
+      margin: 0; padding: 0;
+      height: 100%;
+      background-color: #111; /* very dark gray */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #eee; /* off-white text */
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Matrix code canvas full screen */
+    #matrix {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      background: #111;
+      filter: grayscale(100%) brightness(0.7);
+      opacity: 0.3;
+    }
+
+    /* Container holds the seizure banner */
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px;
+      border-top: 8px solid #cc0000; /* deep red */
+      border-bottom: 8px solid #cc0000;
+      text-align: center;
+      background: rgba(20,20,20,0.9); /* nearly black */
+      border-radius: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    h1 {
+      font-size: 2.7em;
+      color: #cc0000; /* red for warning */
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    h2 {
+      font-weight: normal;
+      color: #bbb; /* lighter gray */
+      margin-bottom: 30px;
+      font-size: 1.2em;
+      font-style: normal;
+    }
+
+    p {
+      color: #aaa; /* medium gray */
+      line-height: 1.6;
+      margin-top: 10px;
+    }
+
+    .agencies {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      filter: grayscale(100%);
+    }
+
+    .agency-logo {
+      height: 80px;
+      background: #222;
+      border-radius: 8px;
+      padding: 5px;
+      object-fit: contain;
+      filter: brightness(0.9);
+      transition: filter 0.3s ease;
+    }
+
+    .agency-logo:hover {
+      filter: brightness(1.1);
+    }
+
+    .info {
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #666; /* darker gray */
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Matrix Code Canvas -->
+  <canvas id="matrix"></canvas>
+
+  <div class="container" role="main" aria-label="Seizure notice">
+    <h1>THIS WEBSITE HAS BEEN SEIZED</h1>
+    <h2>
+      Pursuant to a arrest warrant issued by a Court under the authority of 18 U.S.C. §§ 981, 982, and 1030.
+    </h2>
+    <p>
+      This domain has been seized by the Federal Bureau of Investigation (FBI), in cooperation with Australian Federal Police, as part of a coordinated international law enforcement operation.
+      The operation was conducted by the Australian Federal Police's Cyber Division and the NSW Department of Justice with support from global agencies.
+    </p>
+
+    
+    <div class="info">
+      <p>Case Number: 24-CR-8991-A</p>
+      <p>Seizure Date: June 6, 2025</p>
+    </div>
+  </div>
+
+  <audio autoplay loop>
+    <source src="https://github.com/amazingwebsitesupersigma/amazingwebsitesupersigma.github.io/raw/refs/heads/main/music/GTA%20IV%20-%20Loading%20Screen%20Theme%20%5BREMASTERED%20&%20EXTENDED%5D.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    // Matrix Code Rain Effect with gray-green theme
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const fontSize = 16;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = new Array(columns).fill(0);
+
+    function draw() {
+      ctx.fillStyle = "rgba(17,17,17,0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#4CAF50"; // subtle greenish gray
+      ctx.font = fontSize + "px monospace";
+
+      for(let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 50);
+  </script>
+</body>
+</html>
